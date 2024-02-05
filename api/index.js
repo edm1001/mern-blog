@@ -1,15 +1,21 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
+
 const app = express();
+const PORT = 4000
 
 app.use(cors());
 app.use(express.json());
 
 app.post('/register', (req,res) => {
     const {username, password} = req.body;
-    res.json({requestData: {username, password}})
+    res.json({requestData: {username, password}});
+    res.json('testok3')
 })
 
-//53 data not passing to windows
+mongoose.connect('mongodb+srv://blog-user:blogpassword1@cluster0.gfbgpxl.mongodb.net/?retryWrites=true&w=majority')
 
-app.listen(4000);
+
+
+app.listen(PORT);
+
