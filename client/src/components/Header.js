@@ -14,7 +14,13 @@ const Header = () => {
     })
   }, [])
   // function to log out
- 
+  function logout() {
+    fetch('http://localhost:4000/logout', {
+      credentials: 'include',
+      method: 'POST'
+      })
+      setUsername(null)
+  }
   return (
     <header>
     <nav>
