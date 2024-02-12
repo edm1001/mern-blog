@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const cors = require("cors");
 const User = require("./models/User");
 const mongoose = require("mongoose");
@@ -64,7 +65,13 @@ app.post("/logout", (req, res) => {
 });
 // api req for createpost.jsx
 app.post("/post", uploadMiddleware.single('file'), (req, res) => {
-  res.json({files:req.file})   
+  const {originalname, path} = req.file;
+  const parts = originalname.split('.');
+  const ext = parts[parts.length-1];
+  const newPath = path+'.'+ext
+  fs.renameSync(path, newPath);
+  
+  res.json({ext})   
 })
 
 
