@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const User = require("./models/User");
+const Post = require("./models/Post");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
@@ -63,16 +64,29 @@ app.get("/profile", (req, res) => {
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
-// api req for createpost.jsx
-app.post("/post", uploadMiddleware.single('file'), (req, res) => {
+
+// api req for createpost.jsx to create post
+app.post("/post", uploadMiddleware.single('file'), async (req, res) => {
   const {originalname, path} = req.file;
   const parts = originalname.split('.');
   const ext = parts[parts.length-1];
   const newPath = path+'.'+ext
   fs.renameSync(path, newPath);
-  
-  res.json({ext})   
+
+  const {title, summary, content} = req.body;
+  await Post.create({
+  title,
+  summary,
+  content,
+  cover:newPath,  
+  })
+
+  res.json(postDoc)   
 })
 
+// get /posts
+app.get("/post", async (req, res) => {
+  res.json(await Post.find());
+});
 
 app.listen(4000);
