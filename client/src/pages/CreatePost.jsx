@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const modules = {
+const modules = { //227
   toolbar: [
     [{ header: [1, 2, false] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
@@ -35,6 +35,7 @@ function CreatePost() {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
+  const [redirect, setRedirect] = useState("");
 
   async function createNewPost(ev) {
     const data = new FormData();
@@ -46,7 +47,11 @@ function CreatePost() {
     const response = await fetch('http://localhost:4000/post', {
         method: 'POST',
         body: data,
-    })
+        creadentials: 'include',
+    });
+    if (response.ok) {
+      setRedirect(true);
+    }
   }
 
   return (
