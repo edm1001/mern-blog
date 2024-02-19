@@ -1,19 +1,19 @@
 import React from 'react';
 import {formatISO9075} from 'date-fns';
 
-const Post = ({title, summary, cover, content, createdAt}) => {
+const Post = ({title, summary, cover, content, createdAt, author}) => {
   return (
     <div className="post">
     <div className='image'>
     <img
-      src="https://techcrunch.com/wp-content/uploads/2019/09/plex-live-tv.jpg?w=850&h=492&crop=1"
+      src={'http://localhost:4000/'+cover}
       alt=""
       />
       </div>
     <div className='texts'>
     <h2>{title}</h2>
     <p className='info'>
-      <a className='author' href='#1'> Edmer Bedia</a>
+      <a className='author' href='#1'>{author.username}</a>
       <time>{formatISO9075(new Date (createdAt))}</time>
     </p>
     <p className='summary'>
