@@ -11,9 +11,18 @@ function PostPage() {
                 setPostInfo(postInfo);
             })
         })
-    },[])
+    },[]);
+
+    if(!postInfo) return '';
+
   return (
-    <div>PostPage</div>
+    <div className='post-page'>
+        <div className="image">
+            <img src={`localhost://localhost:4000${postInfo.cover}`} alt="" />
+        </div>
+        <h1>{postInfo.title}</h1>
+        <div dangerouslySetInnerHTML={{html:postInfo.content}}></div>
+    </div>
   )
 }
 
