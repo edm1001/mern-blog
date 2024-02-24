@@ -31,6 +31,7 @@ export default function Header() {
       {username && (
        <>
        {/* if logged in */}
+        {/* add username */}
         <Link to="/" className='logo'>MyBlog</Link>
         <a onClick={logout}>Logout ({username})</a>
        </> 
