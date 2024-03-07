@@ -22,11 +22,18 @@
 - Modern Web Design
 - Scalable database
 - User Authentication
-
+- Updating posts that only the author can edit
+- Deleting posts that only author can delete
 ---
 
 ## Installation
-[TBD]
+
+- go into client and type command in terminal:
+-  npm start
+   
+- go into api and type command in terminal:
+- nodemon index.js
+- Congratulations, app should now be working as intended.
 
 ---
 
@@ -37,6 +44,6 @@ Edmer Valencia
 ---
 
 ## Question
-Contact me through either:
-[GitHub](https://github.com/edm1001)
-[Email: edmerfranciz@gmail.com](mailto:edmerfranciz@gmail.com)
+- Contact me through either:
+- [GitHub](https://github.com/edm1001)
+- [Email: edmerfranciz@gmail.com](mailto:edmerfranciz@gmail.com)
