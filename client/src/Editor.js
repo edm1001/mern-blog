@@ -1,43 +1,29 @@
-import React, { useState } from 'react'
-import ReactQuill from 'react-quill'
+import ReactQuill from "react-quill";
 
+export default function Editor({ value, onChange }) {
 
-export default function Editor({value, onChange}) {
-    const [content, setContent] = useState("");
-    
-    const modules = {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
-          ["link", "image"],
-          ["clean"],
-        ],
-      };
-      const formats = [
-        "header",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-      ];
-    return (
-    
-    < ReactQuill
-          value={content}
-          modules={modules}
-          onChange={(newValue) => setContent(newValue)}
-        />
-  )
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
+
+  return (
+    <div className="content">
+      <ReactQuill
+        value={value}
+        modules={modules}
+        onChange={onChange}
+      />
+    </div>
+  );
 }

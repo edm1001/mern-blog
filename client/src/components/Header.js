@@ -13,7 +13,7 @@ export default function Header() {
         setUserInfo(userInfo)
       })
     })
-  }, []);
+  });
 
   // function to log out
   function logout() {
