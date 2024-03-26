@@ -4,24 +4,23 @@ const cors = require("cors");
 const User = require("./models/User");
 const Post = require("./models/Post");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
-
 const app = express();
 const bcrypt = require("bcrypt");
-const salt = bcrypt.genSaltSync(10);
 
+dotenv.config();
+mongoose.connect(process.env.MONGO_URL);
+const salt = bcrypt.genSaltSync(10);
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-mongoose.connect(
-  "mongodb+srv://blog-user:blogpassword1@cluster0.gfbgpxl.mongodb.net/?retryWrites=true&w=majority"
-);
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
