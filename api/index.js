@@ -6,21 +6,22 @@ const Post = require("./models/Post");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
-const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
 const app = express();
 const bcrypt = require("bcrypt");
 
-dotenv.config();
-mongoose.connect(process.env.MONGO_URL);
 const salt = bcrypt.genSaltSync(10);
+const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
+
+dotenv.config();
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
+mongoose.connect(process.env.MONGO_URL);
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -54,11 +55,15 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
-  const { token } = req.cookies;
-  jwt.verify(token, secret, {}, (err, info) => {
-    if (err) throw err;
-    res.json(info);
-  });
+  const token = req.cookies?.token;
+  if (token) {
+    jwt.verify(token, secret, {}, (err, info) => {
+      if (err) throw err;
+      res.json(info);
+    });
+  } else {
+    res.status(401).json('unauthorized');
+  }
 });
 
 app.post("/logout", (req, res) => {
@@ -77,14 +82,13 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
     const { title, summary, content } = req.body;
-    await Post.create({
+   const postDoc =  await Post.create({
       title,
       summary,
       content,
       cover: newPath,
       author: info.id,
     });
-
     res.json(postDoc);
   });
 });

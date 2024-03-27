@@ -27,6 +27,7 @@ function CreatePost() {
       setRedirect(true);
     }
   }
+  
   if (redirect) {
     return <Navigate to={'/'} />
   }

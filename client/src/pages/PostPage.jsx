@@ -6,13 +6,14 @@ function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useParams();
   const { id } = useParams();
+
   useEffect(() => {
     fetch(`http://localhost:400/post/${id}`).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
       });
     });
-  },[id]);
+  }, [id]);
 
   if (!postInfo) return "";
 
@@ -45,7 +46,10 @@ function PostPage() {
           </Link>
         </div>
       )}
-      <div dangerouslySetInnerHTML={{ html: postInfo.content }}></div>
+      <div className="image">
+        <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: postInfo.content }}></div>
     </div>
   );
 }
