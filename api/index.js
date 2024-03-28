@@ -159,7 +159,7 @@ app.delete("/post/:id", async (req, res) => {
     if (!isAuthor) {
       return res.status(400).json("You are not the author!");
     }
-    await postDoc.deleteOne();
+    await Post.findByIdAndDelete(id);
     res.json("deleted sucessfully");
   });
 })
