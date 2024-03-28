@@ -62,7 +62,7 @@ app.get("/profile", (req, res) => {
       res.json(info);
     });
   } else {
-    res.status(401).json('unauthorized');
+    res.status(401).json("unauthorized");
   }
 });
 
@@ -72,25 +72,32 @@ app.post("/logout", (req, res) => {
 
 // api req for createpost.jsx to create post
 app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
-  const { originalname, path } = req.file;
-  const parts = originalname.split(".");
-  const ext = parts[parts.length - 1];
-  const newPath = path + "." + ext;
-  fs.renameSync(path, newPath);
+  if (req.file) {
+    const { originalname, path } = req.file;
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    const newPath = path + "." + ext;
+    fs.renameSync(path, newPath);
+  }
 
-  const { token } = req.cookies;
-  jwt.verify(token, secret, {}, async (err, info) => {
-    if (err) throw err;
-    const { title, summary, content } = req.body;
-   const postDoc =  await Post.create({
-      title,
-      summary,
-      content,
-      cover: newPath,
-      author: info.id,
+  const token = req.cookies?.token;
+  if (token) {
+    jwt.verify(token, secret, {}, async (err, info) => {
+      if (err) throw err;
+      const { title, summary, content } = req.body;
+      const cover = req.file ? newPath : null;
+      const postDoc = await Post.create({
+        title,
+        summary,
+        content,
+        cover,
+        author: info.id,
+      });
+      res.json(postDoc);
     });
-    res.json(postDoc);
-  });
+  } else {
+    res.status(401).json("unauthorized");
+  }
 });
 
 // update post
@@ -104,7 +111,7 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
     fs.renameSync(path, newPath);
   }
 
-  const { token } = req.cookies;
+  const token = req.cookies?.token;
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
     const { id, title, summary, content } = req.body;
