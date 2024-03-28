@@ -72,11 +72,13 @@ app.post("/logout", (req, res) => {
 
 // api req for createpost.jsx to create post
 app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
+  let newPath = null;
+
   if (req.file) {
     const { originalname, path } = req.file;
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext;
+    newPath = path + "." + ext;
     fs.renameSync(path, newPath);
   }
 
@@ -85,12 +87,11 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
     jwt.verify(token, secret, {}, async (err, info) => {
       if (err) throw err;
       const { title, summary, content } = req.body;
-      const cover = req.file ? newPath : null;
       const postDoc = await Post.create({
         title,
         summary,
         content,
-        cover,
+        cover: newPath,
         author: info.id,
       });
       res.json(postDoc);
@@ -120,12 +121,12 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
     if (!isAuthor) {
       return res.status(400).json("You are not the author!");
     }
-    await postDoc.update({
-      title,
-      summary,
-      content,
-      cover: newPath ? newPath : postDoc.cover,
-    });
+    postDoc.title = title;
+    postDoc.summary = summary;
+    postDoc.content = content;
+    postDoc.cover = newPath ? newPath : postDoc.cover;
+
+    await postDoc.save();
     res.json(postDoc);
   });
 });
