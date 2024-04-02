@@ -26,14 +26,11 @@ header {
   margin-bottom: 50px;
   align-items: center;
 }
-header a {
-  text-decoration: none;
-  color: inherit;
-}
-header a.logo {
+
+/* header a.logo {
   font-weight: bold;
   font-size: 1.5rem;
-}
+} */
 header nav {
   display: flex;
   gap: 15px;
@@ -83,10 +80,10 @@ div.post-page div.image img{
   width: 100%;
 }
 /* login and register */
-form.login , form.register {
+/* form.login , form.register {
   max-width: 400px;
   margin: 0 auto;
-}
+} */
 input {
   display:block;
   margin-bottom: 5px;
@@ -104,9 +101,9 @@ input {
   border-radius: 5px;
   padding: 7px 0;
 } */
-form h1, form.register h1 {
+/* form h1, form.register h1 {
   text-align: center;
-}
+} */
 div.post-page div.image {
   max-height: 200px;
   overflow: hidden;

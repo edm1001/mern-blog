@@ -6,7 +6,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const {setUserInfo} = useContext(UserContext);
+  const { setUserInfo } = useContext(UserContext);
 
   async function login(ev) {
     ev.preventDefault();
@@ -19,10 +19,10 @@ const LoginPage = () => {
     });
     // if login is successful
     if (response.ok) {
-      response.json().then(userInfo => {
-        setUserInfo(userInfo)
+      response.json().then((userInfo) => {
+        setUserInfo(userInfo);
         setRedirect(true);
-      })
+      });
     } else {
       alert("wrong credentials");
     }
@@ -33,22 +33,28 @@ const LoginPage = () => {
   }
 
   return (
-    <form className="login" onSubmit={login}>
-      <h1>Login</h1>
-      <input
-        type="text"
-        value={username}
-        onChange={(ev) => setUsername(ev.target.value)}
-        placeholder="username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(ev) => setPassword(ev.target.value)}
-        placeholder="password"
-      />
-      <button>Login</button>
-    </form>
+    <div className="flex justify-center items-center mt-5">
+      <form className="block text-center" onSubmit={login}>
+        <h1 className="font-bold mb-3 text-3xl text-gray-500">Login</h1>
+        <input
+          type="text"
+          value={username}
+          onChange={(ev) => setUsername(ev.target.value)}
+          placeholder="username"
+          className="w-full mb-2 px-3 py-2 border rounded-lg"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(ev) => setPassword(ev.target.value)}
+          placeholder="password"
+          className="w-full mb-4 px-3 py-2 border rounded-lg items-center"
+        />
+        <button className="w-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Welccome Back
+        </button>
+      </form>
+    </div>
   );
 };
 

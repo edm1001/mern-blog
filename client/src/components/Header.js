@@ -26,24 +26,43 @@ export default function Header() {
   const username = userInfo?.username;
 
   return (
-    <header>
-      <Link to='/' className="logo">BlogApp</Link>
-      <nav>
+    <header className="mt-7">
+      <Link to="/" className="logo">
+        <h1 className="text-blue-400 text-5xl pl-1 font-bold" >
+        Blog App
+        </h1>
+      </Link>
+      <nav className="mr-3">
         {username && (
           <>
             {/* if logged in */}
             {/* add username */}
             <Link to="/create">
-              Create New Post!
+              <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md">
+                Create New Post!
+              </button>
             </Link>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={logout}>Logout ({username})</button>
+            <button
+              className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md"
+              onClick={logout}
+            >
+              Logout ({username})
+            </button>
           </>
         )}
         {!username && (
           <>
             {/* if logged out */}
-            <Link to="/login">Log In</Link>
-            <Link to="/register"> Sign Up</Link>
+            <Link to="/login">
+              <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md">
+                Log In
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md">
+                Sign Up
+              </button>
+            </Link>
           </>
         )}
       </nav>
