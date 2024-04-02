@@ -59,10 +59,10 @@ div.post p.info {
   display: flex;
   gap: 10px
 }
-div.post p.info a.author {
+/* div.post p.info a.author {
   color: #333;
   text-decoration: none;
-}
+} */
 
 div.post p.summary {
   margin: 8px 0;

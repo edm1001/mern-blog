@@ -1,4 +1,4 @@
-import { formatISO9075 } from "date-fns";
+// import { formatISO9075 } from "date-fns";
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
@@ -14,15 +14,21 @@ function PostPage() {
         setPostInfo(postInfo);
       });
     });
-  }, []);
+  }, [id]);
 
   if (!postInfo) return "";
 
   return (
     <div className="post-page flex flex-col justify-center items-center">
-      <h1 className="text-2xl font-bold text-center">{postInfo.title}</h1>
+      <h1 className="text-blue-500 text-2xl font-bold text-center">
+        {postInfo.title}
+      </h1>
       <time className="mb-4">
-        {formatISO9075(new Date(postInfo.createdAt))}
+        {new Date(postInfo.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </time>
       {/* Image */}
       <div>
@@ -32,7 +38,9 @@ function PostPage() {
         className="content text-center"
         dangerouslySetInnerHTML={{ __html: postInfo.content }}
       ></div>
-      <h4 className="text-2xs mb-4 font-bold">Author: {postInfo.author.username}</h4>
+      <h4 className="text-2xs mb-4 font-bold">
+        Author: {postInfo.author.username}
+      </h4>
 
       {/* Edit and Delete buttons side by side */}
       <div className="flex space-x-4 mb-4">
