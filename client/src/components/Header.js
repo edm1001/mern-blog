@@ -42,12 +42,12 @@ export default function Header() {
                 Create New Post!
               </button>
             </Link>
-            <button
+            <a 
               className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md"
               onClick={logout}
             >
               Logout ({username})
-            </button>
+            </a>
           </>
         )}
         {!username && (

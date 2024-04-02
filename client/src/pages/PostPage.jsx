@@ -14,17 +14,29 @@ function PostPage() {
         setPostInfo(postInfo);
       });
     });
-  }, [id]);
+  }, []);
 
   if (!postInfo) return "";
 
   return (
-    <div className="post-page">
-      <h1>{postInfo.title}</h1>
-      <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
-      <div>by @{postInfo.author.username}</div>
-      {userInfo.id === postInfo.author._id && (
-        <div className="edit-row  bg-red text-green">
+    <div className="post-page flex flex-col justify-center items-center">
+      <h1 className="text-center">{postInfo.title}</h1>
+      <time className="mb-4">
+        {formatISO9075(new Date(postInfo.createdAt))}
+      </time>
+      {/* Image */}
+      <div>
+        <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
+      </div>
+      <div
+        className="content text-center"
+        dangerouslySetInnerHTML={{ __html: postInfo.content }}
+      ></div>
+      <div className="mb-4">by @{postInfo.author.username}</div>
+
+      {/* Edit and Delete buttons side by side */}
+      <div className="flex space-x-4 mb-4">
+        {userInfo.id === postInfo.author._id && (
           <Link to={`/edit/${postInfo._id}`} className="no-underline">
             <button className="bg-green-700 text-white flex p-3 rounded-lg hover:border-green-400 hover:bg-white hover:text-green-700 border-2 border-green-700">
               <svg
@@ -44,11 +56,9 @@ function PostPage() {
               Edit Post
             </button>
           </Link>
-        </div>
-      )}
-      {userInfo.id === postInfo.author._id && (
-        <div className="delete-row">
-          {/*delete*/}
+        )}
+
+        {userInfo.id === postInfo.author._id && (
           <Link className="delete-btn" to={`/delete/${postInfo._id}`}>
             <button className="bg-red-700 text-white flex px-1 py-3 rounded-lg hover:border-red-400 hover:bg-white hover:text-red-500 border-2 border-red-700">
               <svg
@@ -68,15 +78,8 @@ function PostPage() {
               Delete Post
             </button>
           </Link>
-        </div>
-      )}
-      <div className="image">
-        <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
+        )}
       </div>
-      <div
-        className="content"
-        dangerouslySetInnerHTML={{ __html: postInfo.content }}
-      ></div>
     </div>
   );
 }
