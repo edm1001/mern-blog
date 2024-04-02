@@ -13,7 +13,7 @@ export default function Header() {
         setUserInfo(userInfo);
       });
     });
-  }, []);
+  }, [setUserInfo]);
 
   // function to log out
   function logout() {
@@ -36,7 +36,7 @@ export default function Header() {
             <Link to="/create">
               Create New Post!
             </Link>
-            <a onClick={logout}>Logout ({username})</a>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={logout}>Logout ({username})</button>
           </>
         )}
         {!username && (

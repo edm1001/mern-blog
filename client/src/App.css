@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
@@ -92,16 +96,14 @@ input {
   background-color: white;
   border-radius: 5px;
 }
-button {
+/* button {
   cursor: pointer;
   width: 100%;
   display: block;
-  background-color: #555;
   border: 0;
-  color: white;
   border-radius: 5px;
   padding: 7px 0;
-}
+} */
 form h1, form.register h1 {
   text-align: center;
 }

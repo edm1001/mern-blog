@@ -7,7 +7,6 @@ function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useContext(UserContext);
   const { id } = useParams();
-  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:4000/post/${id}`).then((response) => {
