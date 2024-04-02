@@ -113,10 +113,7 @@ div.post-page div.image img {
   object-fit: contain;
   object-position: center center;
 }
-div.post-page a {
-  color: #333;
-  text-decoration: underline;
-}
+
 div.post-page h1 {
   text-align: center;
 }
