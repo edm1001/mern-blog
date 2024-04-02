@@ -46,24 +46,32 @@ function EditPost() {
   }
 
   return (
-    <form onSubmit={updatePost}>
+    <form onSubmit={updatePost} className=" mx-auto mt-8 p-4 bg-white rounded-lg">
       <input
         type="title"
-        placeholder={"Title"}
+        placeholder="Title"
         value={title}
         onChange={(ev) => setTitle(ev.target.value)}
+        className="block w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
       />
       <input
         type="summary"
-        placeholder={"Summary"}
+        placeholder="Summary"
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
+        className="block w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
       />
-      <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
-      <Editor value={content} onChange={setContent} />
-      <button style={{ marginTop: "8px" }}>Update Post!</button>
+      <input type="file" onChange={(ev) => setFiles(ev.target.files)} className="mt-4" />
+      <Editor value={content} onChange={setContent} className="mt-4" />
+      <button
+        type="submit"
+        className="mt-8 bg-indigo-500 text-white font-semibold py-2 px-4 rounded-md border-2 border-indigo-500 hover:bg-white hover:text-indigo-500 "
+      >
+        Update Post
+      </button>
     </form>
   );
+  
 }
 
 export default EditPost;

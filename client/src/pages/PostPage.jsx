@@ -20,7 +20,7 @@ function PostPage() {
 
   return (
     <div className="post-page flex flex-col justify-center items-center">
-      <h1 className="text-center">{postInfo.title}</h1>
+      <h1 className="text-2xl font-bold text-center">{postInfo.title}</h1>
       <time className="mb-4">
         {formatISO9075(new Date(postInfo.createdAt))}
       </time>
@@ -32,7 +32,7 @@ function PostPage() {
         className="content text-center"
         dangerouslySetInnerHTML={{ __html: postInfo.content }}
       ></div>
-      <div className="mb-4">by @{postInfo.author.username}</div>
+      <h4 className="text-2xs mb-4 font-bold">Author: {postInfo.author.username}</h4>
 
       {/* Edit and Delete buttons side by side */}
       <div className="flex space-x-4 mb-4">
