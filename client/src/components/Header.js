@@ -33,13 +33,16 @@ export default function Header() {
         </h1>
       </Link>
       <nav className="mr-3">
+      <Link to="/supplements"> <button>Supplements</button></Link>
+        <Link to="/equipment"> Equipment</Link>
+        {/* add routes to product and supplement page */}
         {username && (
           <>
             {/* if logged in */}
             {/* add username */}
             <Link to="/create">
               <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md">
-                Create New Post!
+                Create Post!
               </button>
             </Link>
             <a href="/"
