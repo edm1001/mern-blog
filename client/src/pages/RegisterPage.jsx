@@ -13,6 +13,7 @@ const RegisterPage = () => {
     });
     if (response.status === 200) {
       alert("register success");
+      window.location.href = "/blog";
     } else {
       alert("registration failed");
     }
@@ -29,9 +30,7 @@ const RegisterPage = () => {
         onChange={(ev) => setUsername(ev.target.value)}
         className="w-full mb-2 px-3 py-2 border rounded-lg"
       />
-
-      <input
-      
+      <input     
         type="password"
         placeholder="password"
         value={password}

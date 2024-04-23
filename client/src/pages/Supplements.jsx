@@ -6,4 +6,4 @@ function Supplements() {
   )
 }
 
-export default Supplements
+export default Supplements;

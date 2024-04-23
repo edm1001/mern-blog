@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import HomePage from "./pages/HomePage";
+import BlogPage from "./pages/BlogPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import {UserContextProvider} from './UserContext'
@@ -17,7 +17,7 @@ function App() {
     <UserContextProvider>
     <Routes>
       <Route path="/" element={<Layout />}>
-      <Route index element={<HomePage/>}/>
+      <Route path="/blog" element={<BlogPage/>}/>
       <Route  path='/login' element={<LoginPage/>}/>
       <Route path='/register' element={<RegisterPage/>}/>
       <Route path='/create' element={<CreatePost/>}/>

@@ -29,7 +29,7 @@ const LoginPage = () => {
   }
   if (redirect) {
     // navigate home
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/blog"} />;
   }
 
   return (
