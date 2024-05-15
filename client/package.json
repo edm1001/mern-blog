@@ -1,5 +1,4 @@
 {
-  "homepage": "t https://edm1001.github.io/mern-blog",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -43,7 +42,6 @@
     ]
   },
   "devDependencies": {
-    "ghpages": "^0.0.10",
     "tailwindcss": "^3.4.3"
   }
 }

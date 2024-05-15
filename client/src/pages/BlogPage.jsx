@@ -36,7 +36,10 @@ export default function IndexPage() {
     });
   }, []);
   return (
-    <>
+    <div>
+      <div className="bg-red-200">
+      For Our Sponsors:
+      </div>
     {username && (
       <>
         {/* if logged in */}
@@ -74,6 +77,6 @@ export default function IndexPage() {
         <Post {...post} />
       ))}
     </div>
-    </>
+    </div>
   );
 }
