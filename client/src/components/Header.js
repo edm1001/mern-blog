@@ -18,9 +18,9 @@ export default function Header() {
   return (
     <header className="mt-7">
       <Link to="/" className="logo">
-        <h1 className="text-blue-400 text-5xl pl-1 font-bold">HeadlineHub</h1>
+        <h1 className="text-xl pl-1 font-bold text-white">HeadlineHub</h1>
       </Link>
-      <nav className="mr-3">
+      <nav className="mx-auto text-white">
         <Link to="/blog">Blog</Link>
       </nav>
       <div className="flex flex-row">
@@ -28,12 +28,12 @@ export default function Header() {
       <>
         {/* if logged in */}
         <Link to="/create">
-          <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md">
+          <button className="hover:bg-gray-700 hover:underline text-white font-bold py-2 px-4 rounded-md text-xs">
             Create Post!
           </button>
         </Link>
         <a href="/"
-          className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md"
+          className="hover:bg-gray-700 hover:text-underline text-white font-bold py-2 px-4 rounded-md text-xs"
           onClick={logout}
         >
           Logout ({username})
@@ -44,12 +44,12 @@ export default function Header() {
       <>
         {/* if logged out */}
         <Link to="/login">
-          <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md text-xs">
+          <button className="hover:bg-gray-700 hover:underline text-white font-bold py-2 px-4 rounded-md text-xs">
             Log In
           </button>
         </Link>
         <Link to="/register">
-          <button className="border border-gray-400 hover:bg-gray-400 hover:text-white text-gray-500 font-bold py-2 px-4 rounded-md text-xs">
+          <button className="hover:bg-gray-700 hover:underline text-white font-bold py-2 px-4 rounded-md text-xs">
             Sign Up
           </button>
         </Link>

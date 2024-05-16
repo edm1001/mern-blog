@@ -41,8 +41,8 @@ function PostPage() {
       <h4 className="text-2xs mb-4 font-bold">
         Author: {postInfo.author.username}
       </h4>
-
-      {/* Edit and Delete buttons side by side */}
+      <h4 className="text-2xs mb-4 font-bold">Location of Post: {postInfo.location}</h4>
+      {/* Edit and Delete buttons */}
       <div className="flex space-x-4 mb-4">
         {userInfo.id === postInfo.author._id && (
           <Link to={`/edit/${postInfo._id}`} className="no-underline">

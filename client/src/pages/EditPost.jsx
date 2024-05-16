@@ -5,9 +5,10 @@ import Editor from "../Editor";
 function EditPost() {
   const { id } = useParams();
   const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
+  const [newsLocation, setNewsLocation] = useState("");
+  const [summary, setSummary] = useState("");
   const [redirect, setRedirect] = useState("");
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function EditPost() {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
+    data.set("location", newsLocation);
     data.set("content", content);
     data.set("id", id);
     if (files?.[0]) {
@@ -46,6 +48,7 @@ function EditPost() {
   }
 
   return (
+    <div className="post-form bg-gray-400">
     <form onSubmit={updatePost} className=" mx-auto mt-8 p-4 bg-white rounded-lg">
       <input
         type="title"
@@ -53,6 +56,12 @@ function EditPost() {
         value={title}
         onChange={(ev) => setTitle(ev.target.value)}
         className="block w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+      />
+      <input 
+        type="location"
+        placeholder="Location"
+        className="block w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+        onChange={(ev) => setNewsLocation(ev.target.value)}
       />
       <input
         type="summary"
@@ -70,6 +79,7 @@ function EditPost() {
         Update Post
       </button>
     </form>
+    </div>
   );
   
 }

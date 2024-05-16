@@ -18,12 +18,12 @@ export default function Editor({ value, onChange }) {
   };
 
   return (
-    <div className="content">
+    <section className="content p-2 text-white">
       <ReactQuill
         value={value}
         modules={modules}
         onChange={onChange}
       />
-    </div>
+    </section>
   );
 }
