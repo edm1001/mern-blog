@@ -16,8 +16,8 @@ function CreatePost() {
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set("file", files[0]);
     data.set("location", location);
+    data.set("file", files[0]);
     ev.preventDefault();
     
     const response = await fetch("http://localhost:4000/post", {
@@ -44,7 +44,7 @@ function CreatePost() {
       />
       <input
         type="summary"
-        placeholder={"Summary"}
+        placeholder="Subject & Date"
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
@@ -52,6 +52,7 @@ function CreatePost() {
         type="location"
         placeholder="Location"
         className="block w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+        value={location}
         onChange={(ev) => setLocation(ev.target.value)}
       />
       <input type="file" onChange={(ev) => setFiles(ev.target.files)} />

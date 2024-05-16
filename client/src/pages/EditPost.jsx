@@ -14,9 +14,10 @@ function EditPost() {
   useEffect(() => {
     fetch("http://localhost:4000/post/" + id).then((response) => {
       response.json().then((postInfo) => {
-        setTitle(postInfo.titile);
+        setTitle(postInfo.title);
         setContent(postInfo.content);
         setSummary(postInfo.summary);
+        setLocation(postInfo.location)
       });
     });
   }, [id]);
@@ -26,7 +27,7 @@ function EditPost() {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
-    data.set("location", setLocation);
+    data.set("location", location);
     data.set("content", content);
     data.set("id", id);
     if (files?.[0]) {
@@ -61,11 +62,12 @@ function EditPost() {
         type="location"
         placeholder="Location"
         className="block w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+        value={location}
         onChange={(ev) => setLocation(ev.target.value)}
       />
       <input
         type="summary"
-        placeholder="Summary"
+        placeholder="Subject & Date(mm/dd/yyyy)"
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
         className="block w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
