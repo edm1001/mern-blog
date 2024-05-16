@@ -7,7 +7,7 @@ function CreatePost() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  const [newLocation, setNewLocation] = useState("");
+  const [location, setLocation] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
@@ -17,7 +17,7 @@ function CreatePost() {
     data.set("summary", summary);
     data.set("content", content);
     data.set("file", files[0]);
-    data.set("location", newLocation);
+    data.set("location", location);
     ev.preventDefault();
     
     const response = await fetch("http://localhost:4000/post", {
@@ -52,7 +52,7 @@ function CreatePost() {
         type="location"
         placeholder="Location"
         className="block w-full mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-        onChange={(ev) => setNewLocation(ev.target.value)}
+        onChange={(ev) => setLocation(ev.target.value)}
       />
       <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
       <Editor value={content} onChange={setContent} />

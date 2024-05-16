@@ -15,10 +15,11 @@ return (
       <Link to={`/post/${_id}`}>
         <h2 className="text-xl font-semibold mb-2 text-blue-400 hover:text-blue-700">{title}</h2>
       </Link>
+        <p>{location}</p>
       <p className="info text-sm text-gray-600">
-        <a className="author text-gray-800 font-semibold hover:underline">
+        <p className="author text-gray-800 font-semibold hover:underline">
           {author.username}
-        </a>
+        </p>
         <time className="ml-2">{formatISO9075(new Date(createdAt))}</time>
       </p>
       <p className="summary mt-2 text-gray-700">{summary}</p>
