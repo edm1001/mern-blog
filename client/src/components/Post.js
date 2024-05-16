@@ -2,7 +2,8 @@ import React from "react";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
 
-const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
+// add location parameter
+const Post = ({ _id, title, summary, cover, content, createdAt, author, location }) => {
 return (
   <div className="bg-white rounded-lg flex hover:shadow-md">
     <div className="image">
@@ -11,8 +12,8 @@ return (
       </Link>
     </div>
     <div className="texts flex flex-col justify-between p-4">
-      <Link to={`/post/${_id}`} className="text-blue-400 hover:text-blue-700">
-        <h2 className="text-xl font-semibold mb-2">{title}</h2>
+      <Link to={`/post/${_id}`}>
+        <h2 className="text-xl font-semibold mb-2 text-blue-400 hover:text-blue-700">{title}</h2>
       </Link>
       <p className="info text-sm text-gray-600">
         <a className="author text-gray-800 font-semibold hover:underline">

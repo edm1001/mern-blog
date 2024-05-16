@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext";
 export default function Header() {
   const {userInfo, setUserInfo} = useContext(UserContext)
     // function to log out
+    const username = userInfo?.username;
     function logout() {
       fetch("http://localhost:4000/logout", {
         credentials: "include",
@@ -14,7 +15,6 @@ export default function Header() {
     }
 
 
-  const username = userInfo?.username;
   return (
     <header className="mt-7">
       <Link to="/" className="logo">
