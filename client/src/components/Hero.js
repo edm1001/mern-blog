@@ -1,10 +1,9 @@
-import React from 'react';
+import React from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -15,20 +14,43 @@ const Hero = () => {
   };
 
   const slides = [
-    { id: 1, title: "Talk about anything & everything", link: "/", image: "https://images.pexels.com/photos/1464230/pexels-photo-1464230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { id: 2, title: "Trending Posts", link: "/blog", image: "/images/slide2.jpg" },
-    { id: 3, title: "Join Us!", link: "/register", image: "/images/slide3.jpg" },
+    {
+      id: 1,
+      title: "Talk about anything & everything",
+      link: "/",
+      img:"https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+        id: 2,
+        title: "Latest Posts",
+        link: "/blog",
+        img: "https://images.pexels.com/photos/1464230/pexels-photo-1464230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 3,
+      title: "Join Us!",
+      link: "/register",
+      img: "https://images.pexels.com/photos/2538121/pexels-photo-2538121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
   ];
 
   return (
-    <div className="hero-slider">
+    <div className="hero-slider relative overflow-hidden">
       <Slider {...settings}>
         {slides.map((slide) => (
-          <div key={slide.id} className="slide">
-            <Link to={slide.link}>
-              <img src={slide.image} alt={slide.title} className="slide-image" />
-              <div className="slide-caption text-gray-400">
-                <h2>{slide.title}</h2>
+          <div
+            key={slide.id}
+            className="slide relative w-full h-full"
+            style={{
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              
+            }}
+          >
+            <img src={slide.img} alt={slide.title} className="h-full w-full"></img>
+            <Link to={slide.link} className="block w-full h-full">
+              <div className="slide-caption absolute bottom-4 right-4 bg-black bg-opacity-50 text-white p-4 rounded-lg">
+                <h2 className="text-lg font-bold">{slide.title}</h2>
               </div>
             </Link>
           </div>
@@ -39,4 +61,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

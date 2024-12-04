@@ -19,10 +19,10 @@ export default function DeletePost() {
       });
   };
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-gray-100 rounded-lg shadow-md h-screen bg-dark-bg">
+    <div className="flex flex-col items-center justify-center p-6 bg-gray-400 rounded-lg shadow-md h-screen bg-dark-bg">
       <div className="flex items-center mb-4">
         <FaExclamationTriangle className="text-yellow-500 w-6 h-6 mr-2" />
-        <h2 className="text-lg font-semibold text-dark-text">Are you sure?</h2>
+        <h2 className="text-lg font-semibold text-dark">Are you sure?</h2>
       </div>
       <div className="flex space-x-4">
         <button

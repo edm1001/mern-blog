@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Services() {
     return (
-        <div className="flex flex-col items-center p-6 bg-dark-bg min-h-screen">
+        <div className="flex flex-col items-center p-6 bg-dark-bg my-8">
           <div className="w-full max-w-6xl">
             <h1 className="text-4xl font-bold text-left mb-8 text-dark-text">Our Services</h1>
             <div className="flex flex-col md:flex-row gap-8">

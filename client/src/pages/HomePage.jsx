@@ -9,7 +9,6 @@ function HomePage() {
     <Hero />
     <Services/>
     <About/>
-
     </>
   )
 }
