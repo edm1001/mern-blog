@@ -1,7 +1,7 @@
-// import { formatISO9075 } from "date-fns";
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import { motion } from "framer-motion"; // Import motion
 
 function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
@@ -19,34 +19,79 @@ function PostPage() {
   if (!postInfo) return "";
 
   return (
-    <div className="post-page flex flex-col justify-center items-center">
-      <h1 className="text-blue-500 text-2xl font-bold text-center">
+    <motion.div
+      className="post-page flex flex-col justify-center items-center my-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <motion.h1
+        className="text-blue-500 text-2xl font-bold text-center"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         {postInfo.title}
-      </h1>
-      <time className="mb-4">
+      </motion.h1>
+
+      <motion.time
+        className="mb-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
+      >
         {new Date(postInfo.createdAt).toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
           day: "numeric",
         })}
-      </time>
+      </motion.time>
+
       {/* Image */}
-      <div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+      >
         <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
-      </div>
-      <div
-        className="content text-center"
+      </motion.div>
+
+      <motion.div
+        className="content text-center text-white"
         dangerouslySetInnerHTML={{ __html: postInfo.content }}
-      ></div>
-      <h4 className="text-2xs mb-4 font-bold">
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      ></motion.div>
+
+      <motion.h4
+        className="text-2xs font-bold text-gray-400"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
         Author: {postInfo.author.username}
-      </h4>
-        <h4 className="text-2xs mb-4 font-bold">Location of Post: {postInfo.location}</h4> 
+      </motion.h4>
+
+      <motion.h4
+        className="text-2xs mb-4 font-bold text-gray-400"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.5, duration: 1 }}
+      >
+        Location of Post: {postInfo.location}
+      </motion.h4>
+
       {/* Edit and Delete buttons */}
       <div className="flex space-x-4 mb-4">
         {userInfo.id === postInfo.author._id && (
           <Link to={`/edit/${postInfo._id}`} className="no-underline">
-            <button className="bg-green-700 text-white flex p-3 rounded-lg hover:border-green-400 hover:bg-white hover:text-green-700 border-2 border-green-700">
+            <motion.button
+              className="bg-green-700 text-white flex p-3 rounded-lg hover:border-green-400 hover:bg-white hover:text-green-700 border-2 border-green-700"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -62,13 +107,18 @@ function PostPage() {
                 />
               </svg>
               Edit Post
-            </button>
+            </motion.button>
           </Link>
         )}
 
         {userInfo.id === postInfo.author._id && (
           <Link className="delete-btn" to={`/delete/${postInfo._id}`}>
-            <button className="bg-red-700 text-white flex px-1 py-3 rounded-lg hover:border-red-400 hover:bg-white hover:text-red-500 border-2 border-red-700">
+            <motion.button
+              className="bg-red-700 text-white flex px-1 py-3 rounded-lg hover:border-red-400 hover:bg-white hover:text-red-500 border-2 border-red-700"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -84,11 +134,11 @@ function PostPage() {
                 />
               </svg>
               Delete Post
-            </button>
+            </motion.button>
           </Link>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
