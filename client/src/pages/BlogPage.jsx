@@ -2,6 +2,7 @@ import Post from "../components/Post";
 import {useEffect, useState, useContext} from "react";
 import Hero from "../components/Hero";
 import {UserContext} from "../UserContext";
+import Services from "../components/Services";
 
 // make this into blog Page, home will be somewhere else
 export default function IndexPage() {
@@ -39,7 +40,7 @@ export default function IndexPage() {
         <Post key={post._id} {...post} />
       ))}
   </div>
+<Services/>
 </div>
-
   );
 }

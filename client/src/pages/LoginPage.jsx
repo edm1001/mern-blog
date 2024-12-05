@@ -33,7 +33,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex justify-center items-center mt-5">
+    <div className="flex justify-center items-center h-screen">
       <form className="block text-center" onSubmit={login}>
         <h1 className="font-bold mb-10 text-3xl text-gray-500">Welcome Back!</h1>
         <input

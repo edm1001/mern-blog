@@ -11,6 +11,7 @@ import EditPost from "./pages/EditPost";
 import DeletePost from "./pages/DeletePost";
 import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/edit/:id" element={<EditPost/>}/>
       <Route path="/delete/:id" element={<DeletePost/>}/>
     </Routes>
+      <Footer/>
     </UserContextProvider>
     </>
   );

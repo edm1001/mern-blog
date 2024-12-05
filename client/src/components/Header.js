@@ -23,7 +23,6 @@ export default function Header() {
         <Link to="/" className="logo">
           <h1 className="text-xl font-bold text-white">HeadlineHub</h1>
         </Link>
-
         {/* Mobile Hamburger Icon */}
         <div className="md:hidden flex items-center">
           <button
@@ -36,9 +35,11 @@ export default function Header() {
 
         {/* Desktop Navigation aligned to the right */}
         <nav className="hidden md:flex space-x-6 text-white">
+          <Link to="/" className="hover:bg-gray-700 px-3 py-2 rounded-md" >Home</Link>
           <Link to="/blog" className="hover:bg-gray-700 px-3 py-2 rounded-md">
             Blog
           </Link>
+          <a href="/#about" className="hover:bg-gray-700 px-3 py-2 rounded-md"> About </a>
           {username ? (
             <>
               {/* If logged in */}
