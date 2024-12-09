@@ -13,11 +13,12 @@ const app = express();
 const bcrypt = require("bcrypt");
 const path = require("path");
 
-
 const salt = bcrypt.genSaltSync(10);
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
 
 const path = require("path");
+
+dotenv.config();
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
@@ -27,8 +28,15 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-dotenv.config();
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://your-heroku-app.herokuapp.com"
+        : "http://localhost:3000",
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -173,6 +181,6 @@ app.delete("/post/:id", async (req, res) => {
     await Post.findByIdAndDelete(id);
     res.json("deleted sucessfully");
   });
-})
+});
 
 app.listen(4000);
