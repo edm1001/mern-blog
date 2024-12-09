@@ -11,9 +11,21 @@ const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
 const app = express();
 const bcrypt = require("bcrypt");
+const path = require("path");
+
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
+
+const path = require("path");
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+}
 
 dotenv.config();
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
