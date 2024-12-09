@@ -20,32 +20,19 @@ function PostPage() {
 
   return (
     <motion.div
-      className="post-page flex flex-col justify-center items-center my-4"
+      className="post-page h-screen flex flex-col justify-center items-center my-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       <motion.h1
-        className="text-blue-500 text-2xl font-bold text-center"
+        className="text-blue-300 text-3xl font-bold text-center my-4"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1 }}
       >
         {postInfo.title}
       </motion.h1>
-
-      <motion.time
-        className="mb-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        {new Date(postInfo.createdAt).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </motion.time>
 
       {/* Image */}
       <motion.div
@@ -72,15 +59,26 @@ function PostPage() {
       >
         Author: {postInfo.author.username}
       </motion.h4>
-
-      <motion.h4
+      <motion.time
+        className="mb-4 text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
+      >
+        {new Date(postInfo.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </motion.time>
+      {/* <motion.h4
         className="text-2xs mb-4 font-bold text-gray-400"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
       >
         Location of Post: {postInfo.location}
-      </motion.h4>
+      </motion.h4> */}
 
       {/* Edit and Delete buttons */}
       <div className="flex space-x-4 mb-4">
