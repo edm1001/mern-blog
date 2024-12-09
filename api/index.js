@@ -16,7 +16,6 @@ const path = require("path");
 const salt = bcrypt.genSaltSync(10);
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
 
-const path = require("path");
 
 dotenv.config();
 
