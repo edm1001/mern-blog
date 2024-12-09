@@ -7,7 +7,7 @@ function CreatePost() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  const [location, setLocation] = useState("");
+  // const [location, setLocation] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
@@ -16,7 +16,7 @@ function CreatePost() {
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set("location", location);
+    // data.set("location", location);
     data.set("file", files[0]);
     ev.preventDefault();
 
@@ -34,7 +34,7 @@ function CreatePost() {
     return <Navigate to={"/"} />;
   }
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col my-12">
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center p-4">
         <form
@@ -63,12 +63,12 @@ function CreatePost() {
           {/* Summary Input */}
           <div>
             <label className="block text-gray-600 mb-1" htmlFor="summary">
-              Subject & Date
+              Subject
             </label>
             <input
               id="summary"
               type="text"
-              placeholder="Subject & Date"
+              placeholder="Subject"
               value={summary}
               onChange={(ev) => setSummary(ev.target.value)}
               className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -76,7 +76,7 @@ function CreatePost() {
           </div>
 
           {/* Location Input */}
-          <div>
+          {/* <div>
             <label className="block text-gray-600 mb-1" htmlFor="location">
               Location
             </label>
@@ -88,7 +88,7 @@ function CreatePost() {
               onChange={(ev) => setLocation(ev.target.value)}
               className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
             />
-          </div>
+          </div> */}
 
           {/* File Input */}
           <div>

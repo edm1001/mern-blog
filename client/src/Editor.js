@@ -18,7 +18,7 @@ export default function Editor({ value, onChange }) {
   };
 
   return (
-    <section className="content p-2 text-white">
+    <section className="content p-2 text-black">
       <ReactQuill
         value={value}
         modules={modules}
