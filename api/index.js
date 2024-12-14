@@ -1,10 +1,11 @@
+require("dotenv").config();
+
 const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const User = require("./models/User");
 const Post = require("./models/Post");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
@@ -12,12 +13,22 @@ const uploadMiddleware = multer({ dest: "uploads/" });
 const app = express();
 const bcrypt = require("bcrypt");
 const path = require("path");
-const MONGO_URL = process.env.MONGO_URL;
 const salt = bcrypt.genSaltSync(10);
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
+const MONGO_URL = process.env.MONGO_URL;
 
+if (!MONGO_URL) {
+  console.log("MONGO_URL is not defined");
+  process.exit(1);
+}
 
-dotenv.config();
+mongoose.connect(MONGO_URL)
+  .then(() => {
+  console.log("connected to mongo");
+})
+.catch((err) => {
+  console.log("error connecting to mongo", err);
+})
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
@@ -39,19 +50,6 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
-
-if (!MONGO_URL) {
-  console.log("MONGO_URL is not defined");
-  process.exit(1);
-}
-
-mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => {
-  console.log("connected to mongo");
-})
-.catch((err) => {
-  console.log("error connecting to mongo", err);
-})
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
