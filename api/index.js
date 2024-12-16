@@ -22,10 +22,7 @@ if (!MONGO_URL) {
   process.exit(1);
 }
 mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err.message);

@@ -11,31 +11,42 @@ const LoginPage = () => {
   async function login(ev) {
     ev.preventDefault();
     // logging in returns with wrong credentials
-    const response = await fetch("http://localhost:4000/login", {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    // if login is successful
-    if (response.ok) {
-      response.json().then((userInfo) => {
+    try {
+      const response = await fetch("http://localhost:4000/login", {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        // Successful login
+        const userInfo = await response.json();
         setUserInfo(userInfo);
         setRedirect(true);
-      });
-    } else {
-      alert("wrong credentials");
+      } else if (response.status === 400) {
+        // Specific error for wrong credentials
+        alert("Invalid username or password. Please try again.");
+      } else {
+        // General error for other issues
+        alert("Login failed. Please try again later.");
+      }
+    } catch (err) {
+      console.error("Error during login:", err);
+      alert("An unexpected error occurred. Please try again later.");
     }
   }
+
   if (redirect) {
-    // navigate home
-    return <Navigate to={"/blog"} />;
+    return <Navigate to="/" />;
   }
 
   return (
     <div className="flex justify-center items-center h-screen">
       <form className="block text-center" onSubmit={login}>
-        <h1 className="font-bold mb-10 text-3xl text-gray-500">Welcome Back!</h1>
+        <h1 className="font-bold mb-10 text-3xl text-gray-500">
+          Welcome Back!
+        </h1>
         <input
           type="text"
           value={username}

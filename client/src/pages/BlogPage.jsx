@@ -18,8 +18,6 @@ export default function IndexPage() {
     });
   }, [setUserInfo]);
 
- 
-
   const [posts,setPosts] = useState([]);
   useEffect(() => {
     fetch('http://localhost:4000/post').then(response => {
