@@ -21,15 +21,16 @@ if (!MONGO_URL) {
   console.log("MONGO_URL is not defined");
   process.exit(1);
 }
-
-mongoose.connect(MONGO_URL)
-  .then(() => {
-  console.log("connected to mongo");
-})
-.catch((err) => {
-  console.log("error connecting to mongo", err);
-})
-
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err.message);
+    process.exit(1);
+  });
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 
