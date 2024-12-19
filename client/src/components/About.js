@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <div className=" mx-auto p-4 md:p-12 h-screen w-full bg-gray-900 text-gray-100 flex justify-center items-center" id="about">
+    <div className=" mx-auto p-4 md:p-12 min-h-screen w-full bg-gray-900 text-gray-100 flex justify-center items-center" id="about">
       <div className="flex flex-col md:flex-row items-center md:items-start max-w-6xl w-full">
         {/* Text Section */}
         <motion.div

@@ -32,13 +32,13 @@ const LoginPage = () => {
         alert("Login failed. Please try again later.");
       }
     } catch (err) {
-      console.error("Error during login:", err);
+      console.error("Error during login. Please try again");
       alert("An unexpected error occurred. Please try again later.");
     }
   }
 
   if (redirect) {
-    return <Navigate to="/" />;
+    return <Navigate to="/blog" />;
   }
 
   return (

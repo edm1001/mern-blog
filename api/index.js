@@ -158,12 +158,16 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
 
 // get /posts
 app.get("/post", async (req, res) => {
-  res.json(
-    await Post.find()
+  try {
+    const posts = await Post.find()
       .populate("author", ["username"])
       .sort({ createdAt: -1 })
-      .limit(20)
-  );
+      .limit(20);
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
 });
 
 // get posts/id
