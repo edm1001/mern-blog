@@ -16,6 +16,7 @@ const path = require("path");
 const salt = bcrypt.genSaltSync(10);
 const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
 const MONGO_URL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 4000;
 
 if (!MONGO_URL) {
   console.log("MONGO_URL is not defined");
@@ -193,4 +194,7 @@ app.delete("/post/:id", async (req, res) => {
   });
 });
 
-app.listen(4000);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
