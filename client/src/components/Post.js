@@ -6,19 +6,16 @@ const Post = ({ _id, title, summary, cover, createdAt, author, location }) => {
   return (
     <div>
       {/* Grid Container */}
-      <div className="gap-6 hover:scale-105 hover:ring-8">
+      <div className="gap-6 p-4 my-6 hover:scale-105 hover:ring-4 ring-blue-200 rounded-lg transition-transform duration-200 sm:p-3">
         {/* Individual Post */}
-        <Link
-          to={`/post/${_id}`}
-          className="cursor-pointer "
-        >
+        <Link to={`/post/${_id}`} className="block cursor-pointer">
           {/* Image Section */}
-          <div className={`image ${!cover ? "h-48 bg-gray-200" : ""}`}>
+          <div className={`image flex justify-center pb-1 ${!cover ? "h-40 bg-gray-200" : ""}`}>
             {cover ? (
               <img
                 src={"http://localhost:4000/" + cover}
                 alt={title}
-                className="rounded-t-lg w-full h-48 object-cover"
+                className="rounded-t-lg h-16 w-16 sm:h-48 object-cover"
               />
             ) : (
               <div className="flex justify-center items-center h-full text-gray-500">
@@ -26,21 +23,21 @@ const Post = ({ _id, title, summary, cover, createdAt, author, location }) => {
               </div>
             )}
           </div>
+
           {/* Text Section */}
-          <div className="flex flex-col justify-between p-4">
-            <h2 className="text-xl font-semibold mb-2 text-blue-400 hover:text-blue-700">
+          <div className="">
+            <h2 className="text-xs sm:text-md font-semibold mb-1 text-blue-500 hover:text-blue-700 truncate">
               {title}
             </h2>
-            <p className="info text-sm text-gray-600">
-              <span>{location}</span>
-              <span className="author text-gray-500 font-semibold hover:underline">
+            <p className="info text-xs sm:text-sm text-gray-600">
+              <span className="block sm:inline">{location}</span>
+              <span className="author text-gray-500 font-semibold hover:underline block sm:inline">
                 {author.username}
               </span>
-              <time className="ml-2 text-gray-400">
+              <time className="ml-2 text-gray-400 block sm:inline">
                 {formatISO9075(new Date(createdAt))}
               </time>
             </p>
-            <p className="summary mt-2 text-gray-500">{summary}</p>
           </div>
         </Link>
       </div>

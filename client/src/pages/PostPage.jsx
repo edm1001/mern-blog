@@ -20,7 +20,7 @@ function PostPage() {
 
   return (
     <motion.div
-      className="post-page h-screen flex flex-col justify-center items-center my-4"
+      className="post-page min-h-screen flex flex-col justify-center items-center my-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
