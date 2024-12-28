@@ -14,9 +14,9 @@ const app = express();
 const bcrypt = require("bcrypt");
 const path = require("path");
 const salt = bcrypt.genSaltSync(10);
-const secret = "ajcayub2kjdwa8dnawksnxiuwaendaywdhawidao2dho";
+const secret = process.env.SECRET;
 const MONGO_URL = process.env.MONGO_URL;
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
 if (!MONGO_URL) {
   console.log("MONGO_URL is not defined");
@@ -36,16 +36,17 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
 }
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://headlinehub-6a4bc8139a2f.herokuapp.com/",
+]
 
 app.use(
   cors({
     credentials: true,
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://your-heroku-app.herokuapp.com"
-        : "http://localhost:3000",
+    origin:allowedOrigins
   })
-);
+); 
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -84,11 +85,15 @@ app.get("/profile", (req, res) => {
   const token = req.cookies?.token;
   if (token) {
     jwt.verify(token, secret, {}, (err, info) => {
-      if (err) throw err;
-      res.json(info);
+      if (err) {
+        console.error("JWT verification error:", err);
+        res.status(403).json("Invalid token");
+      } else {
+        res.json(info);
+      }
     });
   } else {
-    res.status(401).json("unauthorized");
+    res.status(401).json("Unauthorized");
   }
 });
 
