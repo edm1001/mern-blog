@@ -34,7 +34,7 @@ const Post = ({ _id, title, summary, cover, createdAt, author, location }) => {
               <span className="author text-gray-500 font-semibold hover:underline block sm:inline">
                 {author.username}
               </span>
-              <time className="ml-2 text-gray-400 block sm:inline">
+              <time className="ml-2 text-gray-400">
                 {formatISO9075(new Date(createdAt))}
               </time>
             </p>
