@@ -36,15 +36,12 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
 }
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://headlinehub-6a4bc8139a2f.herokuapp.com/",
-]
 
 app.use(
   cors({
+    origin: ["https://headlinehub-6a4bc8139a2f.herokuapp.com/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-    origin:allowedOrigins
   })
 ); 
 app.use(express.json());
