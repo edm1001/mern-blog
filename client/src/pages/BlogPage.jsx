@@ -3,15 +3,14 @@ import { useEffect, useState, useContext } from "react";
 import Hero from "../components/Hero";
 import { UserContext } from "../UserContext";
 import About from "../components/About";
-// import Services from "../components/Services";
-
-// make this into blog Page, home will be somewhere else
 export default function IndexPage() {
+
   const { userInfo, setUserInfo } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
+  const appUrl = process.env.APP_URL; 
 
   useEffect(() => {
-    fetch("http://localhost:4000/profile", {
+    fetch(`${appUrl}/profile`, {
       credentials: "include",
     })
       .then((response) => response.json())
@@ -23,7 +22,7 @@ export default function IndexPage() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:4000/post"); 
+        const response = await fetch(`${appUrl}/post`); 
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
