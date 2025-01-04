@@ -35,11 +35,16 @@ if (process.env.NODE_ENV === "production") {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
-}
+};
+// mongoose.set("strictQuery", true);
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://headlinehub-6a4bc8139a2f.herokuapp.com/",
+]
 
 app.use(
   cors({
-    origin: ["https://headlinehub-6a4bc8139a2f.herokuapp.com/"],
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -98,7 +103,7 @@ app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
 
-// api req for createpost.jsx to create post
+// api req for createPost.jsx to create post
 app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   let newPath = null;
 

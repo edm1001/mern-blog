@@ -3,18 +3,19 @@ import { useEffect, useState, useContext } from "react";
 import Hero from "../components/Hero";
 import { UserContext } from "../UserContext";
 import About from "../components/About";
-export default function IndexPage() {
 
+export default function IndexPage() {
+  // const appUrl = process.env.APP_URL; 
   const { userInfo, setUserInfo } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
-  const appUrl = process.env.APP_URL; 
 
   useEffect(() => {
-    fetch(`${appUrl}/profile`, {
+    fetch("http://localhost:4000/profile", {
       credentials: "include",
     })
       .then((response) => response.json())
       .then((userInfo) => setUserInfo(userInfo))
+      .then(data => console.log(data))
       .catch((error) => console.error("Failed to fetch user profile:", error));
   }, [setUserInfo]);
 
@@ -22,7 +23,7 @@ export default function IndexPage() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${appUrl}/post`); 
+        const response = await fetch("http://localhost:4000/post"); 
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
@@ -33,8 +34,7 @@ export default function IndexPage() {
       }
     };
     fetchPosts();
-  }, []);
-
+  }, [setPosts]);
   return (
     <div className=" mx-auto">
       <Hero />
