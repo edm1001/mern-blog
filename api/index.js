@@ -16,7 +16,7 @@ const path = require("path");
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 const MONGO_URL = process.env.MONGO_URL;
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;  
 
 if (!MONGO_URL) {
   console.log("MONGO_URL is not defined");
