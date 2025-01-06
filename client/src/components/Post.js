@@ -10,12 +10,13 @@ const Post = ({ _id, title, summary, cover, createdAt, author, location }) => {
         {/* Individual Post */}
         <Link to={`/post/${_id}`} className="block cursor-pointer">
           {/* Image Section */}
+          {/* TODO: GET401 :4000/profile 401  */}
           <div className={`image flex justify-center pb-1 ${!cover ? "h-40 bg-gray-200" : ""}`}>
             {cover ? (
               <img
                 src={"http://localhost:4000/" + cover}
                 alt={title}
-                className="rounded-t-lg h-16 w-16 sm:h-48 object-cover"
+                className="rounded-t-lg h-28 w-28 md:h-40 md:w-48 object-cover"
               />
             ) : (
               <div className="flex justify-center items-center h-full text-gray-500">
