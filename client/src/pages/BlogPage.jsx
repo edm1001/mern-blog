@@ -4,32 +4,37 @@ import Hero from "../components/Hero";
 import { UserContext } from "../UserContext";
 import About from "../components/About";
 
-
 export default function IndexPage() {
   const { userInfo, setUserInfo } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const BACKEND_URL = process.env.APP_URL || "http://localhost:4000";
 
-  // TODO: fetch user profile
+  // FIXME: fetch user profile
   // fetch(`http://localhost:4000/profile`, {
   useEffect(() => {
+    console.log("Fetching user profile from:", `${BACKEND_URL}/profile`);
     fetch(`${BACKEND_URL}/profile`, {
       credentials: "include",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((userInfo) => {
-        setUserInfo(userInfo)
+        setUserInfo(userInfo);
         console.log("userinfo: ", userInfo);
-        console.log("backend url: ", BACKEND_URL);
       })
       .catch((error) => console.error("Failed to fetch user profile:", error));
   }, [setUserInfo]);
 
+  
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // const response = await fetch("http://localhost:4000/post"); 
-        const response = await fetch(`${BACKEND_URL}/post`); 
+        // const response = await fetch("http://localhost:4000/post");
+        const response = await fetch(`${BACKEND_URL}/post`);
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

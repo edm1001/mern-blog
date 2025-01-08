@@ -16,7 +16,7 @@ const path = require("path");
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 const MONGO_URL = process.env.MONGO_URL;
-const PORT = process.env.PORT || 4000;  
+const PORT = process.env.PORT || 4000;
 
 if (!MONGO_URL) {
   console.log("MONGO_URL is not defined");
@@ -35,12 +35,16 @@ if (process.env.NODE_ENV === "production") {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
-};
+}
+
+app.use(express.json());
+app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 // mongoose.set("strictQuery", true);
 const allowedOrigins = [
   "http://localhost:3000",
   "https://headlinehub-6a4bc8139a2f.herokuapp.com/",
-]
+];
 
 app.use(
   cors({
@@ -48,11 +52,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
-); 
-app.use(express.json());
-app.use(cookieParser());
-app.use("/uploads", express.static(__dirname + "/uploads"));
-
+);
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -82,21 +82,23 @@ app.post("/login", async (req, res) => {
     res.status(400).json("wrong credentials");
   }
 });
-
+// FIXME: fix route to /profile, cannot get
 app.get("/profile", (req, res) => {
+  app.use(cookieParser());
   const token = req.cookies?.token;
-  if (token) {
-    jwt.verify(token, secret, {}, (err, info) => {
-      if (err) {
-        console.error("JWT verification error:", err);
-        res.status(403).json("Invalid token");
-      } else {
-        res.json(info);
-      }
-    });
-  } else {
-    res.status(401).json("Unauthorized");
+  console.log("Token received:", token);
+  if (!token) {
+    console.log("No token provided");
+    return res.status(401).json("Unauthorized");
   }
+
+  jwt.verify(token, secret, {}, (err, info) => {
+    if (err) {
+      console.error("JWT verification error:", err);
+      return res.status(403).json("Invalid token");
+    }
+    res.json(info);
+  });
 });
 
 app.post("/logout", (req, res) => {
@@ -204,4 +206,3 @@ app.delete("/post/:id", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
