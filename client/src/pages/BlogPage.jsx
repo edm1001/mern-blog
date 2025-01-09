@@ -1,16 +1,15 @@
 import Post from "../components/Post";
 import { useEffect, useState, useContext } from "react";
-import Hero from "../components/Hero";
 import { UserContext } from "../UserContext";
 import About from "../components/About";
-
+import Services from "../components/Services";
+ 
 export default function IndexPage() {
   const { userInfo, setUserInfo } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const BACKEND_URL = process.env.APP_URL || "http://localhost:4000";
 
   // FIXME: fetch user profile
-  // fetch(`http://localhost:4000/profile`, {
   useEffect(() => {
     console.log("Fetching user profile from:", `${BACKEND_URL}/profile`);
     fetch(`${BACKEND_URL}/profile`, {
@@ -29,7 +28,6 @@ export default function IndexPage() {
       .catch((error) => console.error("Failed to fetch user profile:", error));
   }, [setUserInfo]);
 
-  
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -49,7 +47,6 @@ export default function IndexPage() {
 
   return (
     <div className=" mx-auto">
-      <Hero />
       {/* Grid Container */}
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 m-2">
         {/* Map Over Posts */}
@@ -61,6 +58,7 @@ export default function IndexPage() {
       </div>
       {/* <Services /> */}
       <About />
+      <Services/>
     </div>
   );
 }
