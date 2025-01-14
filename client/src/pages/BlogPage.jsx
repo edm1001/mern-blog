@@ -3,19 +3,27 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../UserContext";
 import About from "../components/About";
 import Services from "../components/Services";
-const BACKEND_URL = process.env.APP_URL || "http://localhost:4000";
 
 export default function IndexPage() {
+  const BACKEND_URL = process.env.APP_URL || "http://localhost:4000";
   const { userInfo, setUserInfo } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
 
   // FIXME: fetch user profile
   useEffect(() => {
     fetch(`${BACKEND_URL}/profile`, {
-      credentials: "include",
+      credentials: "include",  
     })
-      .then((response) => response.json())
-      .then((userInfo) => setUserInfo(userInfo))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((userInfo) => {
+        setUserInfo(userInfo);
+        console.log("userinfo: ", userInfo);
+      })
       .catch((error) => console.error("Failed to fetch user profile:", error));
   }, [setUserInfo]);
 
@@ -47,7 +55,6 @@ export default function IndexPage() {
             <Post key={post._id} {...post} />
           ))}
       </div>
-      {/* <Services /> */}
       <About />
       <Services />
     </div>

@@ -70,15 +70,10 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username });
-  const passOk = bcrypt.compareSync(password, userDoc.password);
   if (passOk) {
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "strict",
-        secure: process.env.NODE_ENV === "production",
-      }).json({
+      res.cookie("token", token ).json({
         id: userDoc._id,
         username,
       });
@@ -89,7 +84,9 @@ app.post("/login", async (req, res) => {
 });
 // FIXME: fix route to /profile, cannot get
 app.get("/profile", (req, res) => {
-  console.log("Cookies received:", req.cookies);
+  console.log("Raw cookie header:", req.headers.cookie);
+  console.log("Parsed cookies:", req.cookies);
+
   const token = req.cookies?.token;
   console.log("Token received:", token);
   if (!token) {

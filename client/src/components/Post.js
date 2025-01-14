@@ -2,7 +2,7 @@ import React from "react";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
 
-const Post = ({ _id, title, summary, cover, createdAt, author, location }) => {
+const Post = ({ _id, title, cover, createdAt, author, location }) => {
   return (
     <div>
       {/* Grid Container */}
@@ -26,17 +26,17 @@ const Post = ({ _id, title, summary, cover, createdAt, author, location }) => {
 
           {/* Text Section */}
           <div className="">
-            <h2 className="text-xs sm:text-md font-semibold mb-1 text-blue-500 hover:text-blue-700 truncate">
+            <h2 className="text-sm sm:text-md font-semibold mb-1 text-blue-500 hover:text-blue-700 truncate">
               {title}
             </h2>
             <p className="info text-xs sm:text-sm text-gray-600">
-              <span className="block sm:inline">{location}</span>
+              <span className="inline">{location}</span>
+              <time className="text-gray-400">
+                {formatISO9075(new Date(createdAt))}
+              </time>
               <span className="author text-gray-500 font-semibold hover:underline block sm:inline">
                 {author.username}
               </span>
-              <time className="ml-2 text-gray-400">
-                {formatISO9075(new Date(createdAt))}
-              </time>
             </p>
           </div>
         </Link>

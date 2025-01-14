@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 
 const LoginPage = () => {
+  const BACKEND_URL = process.env.APP_URL || "http://localhost:4000";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -10,13 +11,12 @@ const LoginPage = () => {
 
   async function login(ev) {
     ev.preventDefault();
-    // logging in returns with wrong credentials
     try {
-      const response = await fetch("http://localhost:4000/login", {
+      const response = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
-        body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
         credentials: "include",
+        body: JSON.stringify({ username, password }),
       });
 
       if (response.ok) {
