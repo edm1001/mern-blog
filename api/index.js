@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-// mongoose.set("strictQuery", true);
+mongoose.set("strictQuery", false);
 const allowedOrigins = [
   "http://localhost:3000",
   "https://headlinehub-6a4bc8139a2f.herokuapp.com",
