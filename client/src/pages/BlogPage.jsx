@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../UserContext";
 import About from "../components/About";
 import Services from "../components/Services";
+import Hero from "../components/Hero";
 
 export default function IndexPage() {
   const BACKEND_URL = process.env.APP_URL || "http://localhost:4000";
@@ -12,7 +13,7 @@ export default function IndexPage() {
   // FIXME: fetch user profile
   useEffect(() => {
     fetch(`${BACKEND_URL}/profile`, {
-      credentials: "include",  
+      credentials: "include",
     })
       .then((response) => {
         if (!response.ok) {
@@ -45,18 +46,22 @@ export default function IndexPage() {
   }, []);
 
   return (
-    <div className=" mx-auto min-h-screen">
-      {/* Grid Container */}
-      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 m-2">
-        {/* Map Over Posts */}
-        {posts.length > 0 &&
-          posts.map((post) => (
-            // Post Component Acts as a Grid Item
-            <Post key={post._id} {...post} />
-          ))}
+    <>
+      {/* Section */}
+      <div className="">
+        <Hero />
+        {/* Grid Container */}
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 min-h-screen m-24">
+          {/* Map Over Posts */}
+          {posts.length > 0 &&
+            posts.map((post) => (
+              // Post Component Acts as a Grid Item
+              <Post key={post._id} {...post} />
+            ))}
+        </div>
+        <About />
+        <Services />
       </div>
-      <About />
-      <Services />
-    </div>
+    </>
   );
 }
