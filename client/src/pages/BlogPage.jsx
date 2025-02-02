@@ -11,23 +11,24 @@ export default function IndexPage() {
   const [posts, setPosts] = useState([]);
 
   // FIXME: fetch user profile
-  useEffect(() => {
-    fetch(`${BACKEND_URL}/profile`, {
-      credentials: "include",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((userInfo) => {
-        setUserInfo(userInfo);
-        console.log("userinfo: ", userInfo);
-      })
-      .catch((error) => console.error("Failed to fetch user profile:", error));
-  }, [setUserInfo]);
-
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/profile`, {
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+      const data = await response.json();
+      setUserInfo(data);
+    } catch (error) {
+      console.error("Failed to fetch profile:", error);
+    }
+  };
+  fetchProfile();
+},[]);
+ 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -65,3 +66,21 @@ export default function IndexPage() {
     </>
   );
 }
+
+
+ // useEffect(() => {
+  //   fetch(`${BACKEND_URL}/profile`, {
+  //     credentials: "include",
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((userInfo) => {
+  //       setUserInfo(userInfo);
+  //       console.log("userinfo: ", userInfo);
+  //     })
+  //     .catch((error) => console.error("Failed to fetch user profile:", error));
+  // }, [setUserInfo]);
