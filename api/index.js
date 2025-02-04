@@ -70,16 +70,31 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username });
+
+  if (!userDoc) {
+    return res.status(400).json("User not found");
+  }
+
+  const passOk = bcrypt.compareSync(password, userDoc.password);
   if (passOk) {
     jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
-      if (err) throw err;
-      res.cookie("token", token ).json({
-        id: userDoc._id,
-        username,
-      });
+      if (err) {
+        console.error("JWT signing error:", err);
+        return res.status(500).json("Internal Server Error");
+      }
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+        })
+        .json({
+          id: userDoc._id,
+          username,
+        });
     });
   } else {
-    res.status(400).json("wrong credentials");
+    res.status(400).json("Wrong credentials");
   }
 });
 // FIXME: fix route to /profile, cannot get
@@ -88,7 +103,6 @@ app.get("/profile", (req, res) => {
   console.log("Parsed cookies:", req.cookies);
 
   const token = req.cookies?.token;
-  console.log("Token received:", token);
   if (!token) {
     console.log("No token provided");
     return res.status(401).json("Unauthorized");
@@ -99,6 +113,7 @@ app.get("/profile", (req, res) => {
       console.error("JWT verification error:", err);
       return res.status(403).json("Invalid token");
     }
+    console.log("Authenticated User:", info);
     res.json(info);
   });
 });

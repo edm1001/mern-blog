@@ -16,6 +16,10 @@ useEffect(() => {
     try {
       const response = await fetch(`${BACKEND_URL}/profile`, {
         credentials: "include",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
@@ -27,7 +31,7 @@ useEffect(() => {
     }
   };
   fetchProfile();
-},[]);
+},[setUserInfo]);
  
   useEffect(() => {
     const fetchPosts = async () => {
